@@ -12,14 +12,13 @@
 
     <groupId>com.alibaba.nacos</groupId>
     <artifactId>nacos-spring-parent</artifactId>
-    <version>1.1.2</version>
+    <version>1.1.2-qz</version>
     <name>Alibaba Nacos :: Spring :: POM</name>
     <packaging>pom</packaging>
 
 
     <modules>
         <module>nacos-spring-context</module>
-        <module>nacos-spring-samples</module>
     </modules>
 
     <scm>

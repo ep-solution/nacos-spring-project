@@ -5,14 +5,14 @@
     <parent>
         <artifactId>nacos-spring-parent</artifactId>
         <groupId>com.alibaba.nacos</groupId>
-        <version>1.1.2</version>
+        <version>1.1.2-qz</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.alibaba.nacos</groupId>
     <artifactId>nacos-spring-context</artifactId>
-    <version>1.1.2</version>
+    <version>1.1.2-qz</version>
     <name>Alibaba Nacos :: Spring :: Context</name>
     <packaging>jar</packaging>
     <properties>
@@ -60,14 +60,6 @@
             <artifactId>spring-context-support</artifactId>
         </dependency>
 
-        <!-- Testing -->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>nacos-embedded-webserver</artifactId>
-            <version>${project.version}</version>
-            <scope>test</scope>
-        </dependency>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -94,7 +86,7 @@
                 <configuration>
                     <createDependencyReducedPom>false</createDependencyReducedPom>
                     <shadedArtifactAttached>true</shadedArtifactAttached>
-                    <outputFile>${package.temp.dir}/nacos-spring-context-1.12-qz.jar</outputFile>
+                    <outputFile>${package.temp.dir}/nacos-spring-context-1.1.2-qz.jar</outputFile>
 
                     <!-- 关键配置：仅包含 snakeyaml -->
                     <artifactSet>
