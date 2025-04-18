@@ -95,20 +95,44 @@
                     <createDependencyReducedPom>false</createDependencyReducedPom>
                     <shadedArtifactAttached>true</shadedArtifactAttached>
                     <outputFile>${package.temp.dir}/nacos-spring-context-1.12-qz.jar</outputFile>
-                    <filters>
-                        <filter>
-                            <artifact>*:snakeyaml</artifact>
-                            <excludes>
-                                <exclude>**/META-INF/*</exclude>
-                            </excludes>
-                        </filter>
-                    </filters>
+
+                    <!-- 关键配置：仅包含 snakeyaml -->
+                    <artifactSet>
+                        <!-- 排除项目自身代码（可选，按需调整） -->
+<!--                        <excludes>-->
+<!--                            <exclude>${project.groupId}:${project.artifactId}</exclude>-->
+<!--                        </excludes>-->
+                        <!-- 显式包含 snakeyaml -->
+                        <includes>
+                            <include>org.yaml:snakeyaml</include>
+                        </includes>
+                    </artifactSet>
+
+                    <!-- 重定位 snakeyaml -->
                     <relocations>
                         <relocation>
                             <pattern>org.yaml.snakeyaml</pattern>
                             <shadedPattern>${shade-prefix}org.yaml.snakeyaml</shadedPattern>
                         </relocation>
                     </relocations>
+
+                    <!-- 过滤其他依赖的元数据 -->
+                    <filters>
+                        <!-- 排除所有依赖的元数据 -->
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>**/META-INF/*</exclude>
+                            </excludes>
+                        </filter>
+                        <!-- 单独处理 snakeyaml -->
+                        <filter>
+                            <artifact>org.yaml:snakeyaml</artifact>
+                            <includes>
+                                <include>**</include>
+                            </includes>
+                        </filter>
+                    </filters>
                 </configuration>
                 <executions>
                     <execution>
