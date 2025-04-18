@@ -15,6 +15,10 @@
     <version>1.1.2</version>
     <name>Alibaba Nacos :: Spring :: Context</name>
     <packaging>jar</packaging>
+    <properties>
+        <shade-prefix>netease.rd3.</shade-prefix>
+        <package.temp.dir>${pom.basedir}/release</package.temp.dir>
+    </properties>
 
     <dependencies>
 
@@ -81,4 +85,40 @@
 
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.2</version>
+                <configuration>
+                    <createDependencyReducedPom>false</createDependencyReducedPom>
+                    <shadedArtifactAttached>true</shadedArtifactAttached>
+                    <outputFile>${package.temp.dir}/nacos-spring-context-1.12-qz.jar</outputFile>
+                    <filters>
+                        <filter>
+                            <artifact>*:snakeyaml</artifact>
+                            <excludes>
+                                <exclude>**/META-INF/*</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
+                    <relocations>
+                        <relocation>
+                            <pattern>org.yaml.snakeyaml</pattern>
+                            <shadedPattern>${shade-prefix}org.yaml.snakeyaml</shadedPattern>
+                        </relocation>
+                    </relocations>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
